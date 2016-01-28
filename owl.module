@@ -17,7 +17,8 @@ function owl_help($route_name, RouteMatchInterface $route_match) {
     case 'help.page.owl':
       $output = '';
       $output .= '<h3>' . t('About') . '</h3>';
-      $output .= '<p>' . t('OWL Carousel') . '</p>';
+      $output .= '<p>' . t('OWL Carousel: Download code at: https://github.com/tabvn/owl') . '</p>';
+      $output.= '<p>'.t('Video tutorial how to install: https://www.youtube.com/watch?v=PzBMJqkNHQ0').'</p>';
       return $output;
 
     default:
@@ -158,6 +159,12 @@ function _owl_format_settings($settings) {
   return $settings;
 }
 
+
+/**
+ * Convert a string of settings to array.
+ * @param $str
+ * @return string
+ */
 function _owl_string_to_array($str) {
   $str = trim($str);
   $str = str_replace('[', '', $str);
@@ -165,14 +172,5 @@ function _owl_string_to_array($str) {
   $str = explode(',', $str);
 
   return $str;
-
-
-}
-
-/**
- * Implement of hook_js_settings_alter
- */
-function owl_js_settings_alter(array &$settings, \Drupal\Core\Asset\AttachedAssetsInterface $assets) {
-
 
 }
