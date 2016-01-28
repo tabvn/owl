@@ -1,0 +1,178 @@
+<?php
+
+/**
+ * @file
+ * Contains owl.module..
+ */
+
+use Drupal\Core\Field;
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function owl_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the owl module.
+    case 'help.page.owl':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('OWL Carousel') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function owl_theme() {
+  return [
+    'owl' => [
+      'variables' => ['items' => NULL, 'settings' => NULL],
+    ],
+  ];
+}
+
+/**
+ * Themeable for owl
+ */
+function template_preprocess_owl(&$variables) {
+
+
+  $items = $variables['items'];
+
+  $settings = _owl_format_settings($variables['settings']);
+
+  $variables['attributes']['class'][] = 'owl-field-formatter';
+  $variables['attributes']['class'][] = 'owl-carousel';
+  $variables['attributes']['data-settings'] = json_encode($settings);
+
+  $html = '';
+  if (!empty($items)) {
+    $i = 0;
+    foreach ($items as $item) {
+      $html .= '<div class="owl-item-inner owl-item-inner' . $i . '">' . render($item) . '</div>';
+      $i++;
+    }
+  }
+  $ouput = array(
+    '#type' => 'markup',
+    '#markup' => $html,
+  );
+  $variables['output'] = render($ouput);
+
+}
+
+
+/**
+ * Default settings for owl
+ */
+function _owl_default_settings($key = NULL) {
+  $settings = array(
+    'image_style' => '',
+    'image_link' => '',
+    'items' => 5,
+    'itemsDesktop' => '[1199,4]',
+    'itemsDesktopSmall' => '[979,3]',
+    'itemsTablet' => '[768,2]',
+    'itemsMobile' => '[479,1]',
+    'singleItem' => FALSE,
+    'itemsScaleUp' => FALSE,
+    'slideSpeed' => 200,
+    'paginationSpeed' => 800,
+    'rewindSpeed' => 1000,
+    'autoPlay' => FALSE,
+    'stopOnHover' => FALSE,
+    'navigation' => FALSE,
+    'navigationText' => '["prev","next"]',
+    'prevText' => t('prev')->render(),
+    'nextText' => t('next')->render(),
+    'rewindNav' => TRUE,
+    'scrollPerPage' => FALSE,
+    'pagination' => TRUE,
+    'paginationNumbers' => FALSE,
+    'responsive' => TRUE,
+    'responsiveRefreshRate' => 200,
+    'mouseDrag' => TRUE,
+    'touchDrag' => TRUE,
+    'transitionStyle' => 'fade',
+  );
+
+  return isset($settings[$key]) ? $settings[$key] : $settings;
+}
+
+/**
+ * return formatted js array of settings
+ */
+function _owl_format_settings($settings) {
+
+
+  $settings['items'] = (int) $settings['items'];
+  $settings['itemsDesktop'] = _owl_string_to_array($settings['itemsDesktop']);
+  foreach ($settings['itemsDesktop'] as $k => $v) {
+    $settings['itemsDesktop'][$k] = (int) $v;
+  }
+  $settings['itemsDesktopSmall'] = _owl_string_to_array($settings['itemsDesktopSmall']);
+  foreach ($settings['itemsDesktopSmall'] as $k => $v) {
+    $settings['itemsDesktopSmall'][$k] = (int) $v;
+  }
+  $settings['itemsTablet'] = _owl_string_to_array($settings['itemsTablet']);
+  foreach ($settings['itemsTablet'] as $k => $v) {
+    $settings['itemsTablet'][$k] = (int) $v;
+  }
+  $settings['itemsMobile'] = _owl_string_to_array($settings['itemsMobile']);
+  foreach ($settings['itemsMobile'] as $k => $v) {
+    $settings['itemsMobile'][$k] = (int) $v;
+  }
+  $settings['navigationText'] = array(
+    $settings['prevText'],
+    $settings['nextText']
+  );
+
+  $settings['mouseDrag'] = (bool) $settings['mouseDrag'];
+  $settings['pagination'] = (bool) $settings['pagination'];
+  $settings['paginationNumbers'] = (bool) $settings['paginationNumbers'];
+  $settings['responsive'] = (bool) $settings['responsive'];
+  $settings['paginationSpeed'] = (int) $settings['paginationSpeed'];
+  $settings['responsiveRefreshRate'] = (int) $settings['responsiveRefreshRate'];
+  $settings['rewindNav'] = (bool) $settings['rewindNav'];
+  $settings['rewindSpeed'] = (int) $settings['rewindSpeed'];
+  $settings['scrollPerPage'] = (bool) $settings['scrollPerPage'];
+  $settings['singleItem'] = (bool) $settings['singleItem'];
+  $settings['slideSpeed'] = (int) $settings['slideSpeed'];
+  $settings['stopOnHover'] = (bool) $settings['stopOnHover'];
+  $settings['touchDrag'] = (bool) $settings['touchDrag'];
+  $settings['itemsScaleUp'] = (bool) $settings['itemsScaleUp'];
+  $settings['autoPlay'] = (bool) $settings['autoPlay'];
+  $settings['navigation'] = (bool) $settings['navigation'];
+  if (isset($settings['image_style'])) {
+    unset($settings['image_style']);
+  }
+  if (isset($settings['image_link'])) {
+    unset($settings['image_link']);
+  }
+
+
+  return $settings;
+}
+
+function _owl_string_to_array($str) {
+  $str = trim($str);
+  $str = str_replace('[', '', $str);
+  $str = str_replace(']', '', $str);
+  $str = explode(',', $str);
+
+  return $str;
+
+
+}
+
+/**
+ * Implement of hook_js_settings_alter
+ */
+function owl_js_settings_alter(array &$settings, \Drupal\Core\Asset\AttachedAssetsInterface $assets) {
+
+
+}

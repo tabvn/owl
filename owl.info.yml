@@ -1,0 +1,8 @@
+name: owl
+type: module
+description: OWL Carousel
+core: 8.x
+package: Tabvn
+dependencies:
+  - field
+  - image
