@@ -1,0 +1,15 @@
+{% if attributes -%}
+<div{{ attributes }}>
+    {% endif %}
+    {% if title %}
+        <h3>{{ title }}</h3>
+    {% endif %}
+
+    {% for row in rows %}
+        <div{{ row.attributes }}>{{ row.content }}</div>
+    {% endfor %}
+
+
+{% if attributes -%}
+    </div>
+{% endif %}

@@ -18,7 +18,7 @@ function owl_help($route_name, RouteMatchInterface $route_match) {
       $output = '';
       $output .= '<h3>' . t('About') . '</h3>';
       $output .= '<p>' . t('OWL Carousel: Download code at: https://github.com/tabvn/owl') . '</p>';
-      $output.= '<p>'.t('Video tutorial how to install: https://www.youtube.com/watch?v=PzBMJqkNHQ0').'</p>';
+      $output .= '<p>' . t('Video tutorial how to install: https://www.youtube.com/watch?v=PzBMJqkNHQ0') . '</p>';
       return $output;
 
     default:
@@ -33,6 +33,9 @@ function owl_theme() {
     'owl' => [
       'variables' => ['items' => NULL, 'settings' => NULL],
     ],
+    'owl_views' => [
+      'variables' => [],
+    ],
   ];
 }
 
@@ -46,7 +49,7 @@ function template_preprocess_owl(&$variables) {
 
   $settings = _owl_format_settings($variables['settings']);
 
-  $variables['attributes']['class'][] = 'owl-field-formatter';
+  $variables['attributes']['class'][] = 'owl-slider-wrapper';
   $variables['attributes']['class'][] = 'owl-carousel';
   $variables['attributes']['data-settings'] = json_encode($settings);
 
@@ -64,6 +67,30 @@ function template_preprocess_owl(&$variables) {
   );
   $variables['output'] = render($ouput);
 
+}
+
+/**
+ * Prepares variables for Views Owl carousel templates.
+ *
+ * Default template: owl-views.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - view: A View object.
+ */
+function template_preprocess_owl_views(&$variables) {
+  $handler = $variables['view']->style_plugin;
+
+  $settings = _owl_format_settings($handler->options);
+  $variables['attributes']['data-settings'] = json_encode($settings);
+  $variables['attributes']['class'][] = 'owl-slider-wrapper';
+  $variables['attributes']['class'][] = 'owl-carousel';
+
+  $attached = array(
+    '#attached' => array('library' => array('owl/owl'))
+  );
+  render($attached);
+  template_preprocess_views_view_unformatted($variables);
 }
 
 
