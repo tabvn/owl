@@ -7,3 +7,4 @@ Subscribe us on Facebook
 https://www.facebook.com/TabvnGroup
 
 Website: https://tabvn.com
+#License: Free for your personal project. 
