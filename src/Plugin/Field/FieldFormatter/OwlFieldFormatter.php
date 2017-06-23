@@ -373,5 +373,4 @@ class OwlFieldFormatter extends EntityReferenceFormatterBase implements Containe
     return nl2br(Html::escape($item->value));
   }
 
-
 }

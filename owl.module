@@ -5,7 +5,6 @@
  * Contains owl.module..
  */
 
-use Drupal\Core\Field;
 use Drupal\Core\Routing\RouteMatchInterface;
 
 /**
@@ -61,11 +60,11 @@ function template_preprocess_owl(&$variables) {
       $i++;
     }
   }
-  $ouput = array(
+  $output = array(
     '#type' => 'markup',
     '#markup' => $html,
   );
-  $variables['output'] = render($ouput);
+  $variables['output'] = render($output);
 
 }
 
@@ -190,7 +189,7 @@ function _owl_format_settings($settings) {
 /**
  * Convert a string of settings to array.
  * @param $str
- * @return string
+ * @return array
  */
 function _owl_string_to_array($str) {
   $str = trim($str);
