@@ -39,11 +39,9 @@ function owl_theme() {
 }
 
 /**
- * Themeable for owl
+ * Themeable for owl.
  */
 function template_preprocess_owl(&$variables) {
-
-
   $items = $variables['items'];
 
   $settings = _owl_format_settings($variables['settings']);
@@ -60,10 +58,10 @@ function template_preprocess_owl(&$variables) {
       $i++;
     }
   }
-  $output = array(
+  $output = [
     '#type' => 'markup',
     '#markup' => $html,
-  );
+  ];
   $variables['output'] = render($output);
 
 }
@@ -77,7 +75,7 @@ function template_preprocess_owl(&$variables) {
  *   An associative array containing:
  *   - view: A View object.
  */
-function template_preprocess_owl_views(&$variables) {
+function template_preprocess_owl_views(array &$variables) {
   $handler = $variables['view']->style_plugin;
 
   $settings = _owl_format_settings($handler->options);
@@ -85,19 +83,18 @@ function template_preprocess_owl_views(&$variables) {
   $variables['attributes']['class'][] = 'owl-slider-wrapper';
   $variables['attributes']['class'][] = 'owl-carousel';
 
-  $attached = array(
-    '#attached' => array('library' => array('owl/owl'))
-  );
+  $attached = [
+    '#attached' => ['library' => ['owl/owl']],
+  ];
   render($attached);
   template_preprocess_views_view_unformatted($variables);
 }
 
-
 /**
- * Default settings for owl
+ * Default settings for owl.
  */
 function _owl_default_settings($key = NULL) {
-  $settings = array(
+  $settings = [
     'image_style' => '',
     'image_link' => '',
     'items' => 5,
@@ -125,17 +122,15 @@ function _owl_default_settings($key = NULL) {
     'mouseDrag' => TRUE,
     'touchDrag' => TRUE,
     'transitionStyle' => 'fade',
-  );
+  ];
 
   return isset($settings[$key]) ? $settings[$key] : $settings;
 }
 
 /**
- * return formatted js array of settings
+ * Return formatted js array of settings.
  */
 function _owl_format_settings($settings) {
-
-
   $settings['items'] = (int) $settings['items'];
   $settings['itemsDesktop'] = _owl_string_to_array($settings['itemsDesktop']);
   foreach ($settings['itemsDesktop'] as $k => $v) {
@@ -153,10 +148,10 @@ function _owl_format_settings($settings) {
   foreach ($settings['itemsMobile'] as $k => $v) {
     $settings['itemsMobile'][$k] = (int) $v;
   }
-  $settings['navigationText'] = array(
+  $settings['navigationText'] = [
     $settings['prevText'],
-    $settings['nextText']
-  );
+    $settings['nextText'],
+  ];
 
   $settings['mouseDrag'] = (bool) $settings['mouseDrag'];
   $settings['pagination'] = (bool) $settings['pagination'];
@@ -181,15 +176,17 @@ function _owl_format_settings($settings) {
     unset($settings['image_link']);
   }
 
-
   return $settings;
 }
 
-
 /**
  * Convert a string of settings to array.
- * @param $str
+ *
+ * @param string $str
+ *   String to be converted to array.
+ *
  * @return array
+ *   Converted array.
  */
 function _owl_string_to_array($str) {
   $str = trim($str);
