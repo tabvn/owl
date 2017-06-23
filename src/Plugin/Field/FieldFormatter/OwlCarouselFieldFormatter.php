@@ -20,14 +20,14 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Plugin implementation of the 'owl_field_formatter' formatter.
  *
  * @FieldFormatter(
- *   id = "owl_field_formatter",
- *   label = @Translation("Owl Carousel"),
+ *   id = "owlcarousel_field_formatter",
+ *   label = @Translation("OwlCarousel Carousel"),
  *   field_types = {
  *     "image"
  *   }
  * )
  */
-class OwlFieldFormatter extends EntityReferenceFormatterBase implements ContainerFactoryPluginInterface {
+class OwlCarouselFieldFormatter extends EntityReferenceFormatterBase implements ContainerFactoryPluginInterface {
 
   protected $currentUser;
   protected $imageStyleStorage;
@@ -62,7 +62,7 @@ class OwlFieldFormatter extends EntityReferenceFormatterBase implements Containe
    * {@inheritdoc}
    */
   public static function defaultSettings() {
-    return _owl_default_settings() + parent::defaultSettings();
+    return _owlcarousel_default_settings() + parent::defaultSettings();
   }
 
   /**
@@ -228,7 +228,7 @@ class OwlFieldFormatter extends EntityReferenceFormatterBase implements Containe
       '#type' => 'checkbox',
       '#title' => $this->t('Responsive'),
       '#default_value' => $this->getSetting('responsive'),
-      '#description' => $this->t('Uncheck to use Owl Carousel on desktop-only.'),
+      '#description' => $this->t('Uncheck to use OwlCarousel Carousel on desktop-only.'),
     ];
     // responsiveRefreshRate.
     $element['responsiveRefreshRate'] = [
@@ -337,7 +337,7 @@ class OwlFieldFormatter extends EntityReferenceFormatterBase implements Containe
       ];
     }
 
-    $settings = _owl_default_settings();
+    $settings = _owlcarousel_default_settings();
     foreach ($settings as $k => $v) {
       $s = $this->getSetting($k);
       $settings[$k] = isset($s) ? $s : $settings[$k];

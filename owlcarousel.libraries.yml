@@ -1,4 +1,4 @@
-owl:
+owlcarousel:
   css:
     theme:
       lib/owl-carousel/owl.carousel.css: {}
@@ -7,7 +7,7 @@ owl:
       css/owl.css: {}
   js:
     lib/owl-carousel/owl.carousel.js: {}
-    js/owl.js: {}
+    js/owlcarousel.js: {}
   dependencies:
     - core/jquery
     - core/drupal

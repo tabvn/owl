@@ -11,14 +11,14 @@ use Drupal\views\Plugin\views\style\StylePluginBase;
  * @ingroup views_style_plugins
  *
  * @ViewsStyle(
- *   id = "owl",
- *   title = @Translation("Owl Carousel"),
- *   help = @Translation("Displays rows as Owl Carousel."),
- *   theme = "owl_views",
+ *   id = "owlcarousel",
+ *   title = @Translation("OwlCarousel Carousel"),
+ *   help = @Translation("Displays rows as OwlCarousel Carousel."),
+ *   theme = "owlcarousel_views",
  *   display_types = {"normal"}
  * )
  */
-class Owl extends StylePluginBase {
+class OwlCarousel extends StylePluginBase {
 
   /**
    * Does the style plugin allows to use style plugins.
@@ -40,7 +40,7 @@ class Owl extends StylePluginBase {
   protected function defineOptions() {
     $options = parent::defineOptions();
 
-    $settings = _owl_default_settings();
+    $settings = _owlcarousel_default_settings();
     foreach ($settings as $k => $v) {
       $options[$k] = ['default' => $v];
     }
@@ -184,7 +184,7 @@ class Owl extends StylePluginBase {
       '#type' => 'checkbox',
       '#title' => $this->t('Responsive'),
       '#default_value' => $this->options['responsive'],
-      '#description' => $this->t('Uncheck to use Owl Carousel on desktop-only.'),
+      '#description' => $this->t('Uncheck to use OwlCarousel Carousel on desktop-only.'),
     ];
     // responsiveRefreshRate.
     $form['responsiveRefreshRate'] = [

@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains owl.module..
+ * Contains owlcarousel.module..
  */
 
 use Drupal\Core\Routing\RouteMatchInterface;
@@ -10,10 +10,10 @@ use Drupal\Core\Routing\RouteMatchInterface;
 /**
  * Implements hook_help().
  */
-function owl_help($route_name, RouteMatchInterface $route_match) {
+function owlcarousel_help($route_name, RouteMatchInterface $route_match) {
   switch ($route_name) {
     // Main module help for the owl module.
-    case 'help.page.owl':
+    case 'help.page.owlcarousel':
       $output = '';
       $output .= '<h3>' . t('About') . '</h3>';
       $output .= '<p>' . t('OWL Carousel: Download code at: https://github.com/tabvn/owl') . '</p>';
@@ -27,24 +27,24 @@ function owl_help($route_name, RouteMatchInterface $route_match) {
 /**
  * Implements hook_theme().
  */
-function owl_theme() {
+function owlcarousel_theme() {
   return [
-    'owl' => [
+    'owlcarousel' => [
       'variables' => ['items' => NULL, 'settings' => NULL],
     ],
-    'owl_views' => [
+    'owlcarousel_views' => [
       'variables' => [],
     ],
   ];
 }
 
 /**
- * Themeable for owl.
+ * Themeable for owlcarousel.
  */
-function template_preprocess_owl(&$variables) {
+function template_preprocess_owlcarousel(&$variables) {
   $items = $variables['items'];
 
-  $settings = _owl_format_settings($variables['settings']);
+  $settings = _owlcarousel_format_settings($variables['settings']);
 
   $variables['attributes']['class'][] = 'owl-slider-wrapper';
   $variables['attributes']['class'][] = 'owl-carousel';
@@ -67,18 +67,18 @@ function template_preprocess_owl(&$variables) {
 }
 
 /**
- * Prepares variables for Views Owl carousel templates.
+ * Prepares variables for Views OwlCarousel carousel templates.
  *
- * Default template: owl-views.html.twig.
+ * Default template: owlcarousel-views.html.twig.
  *
  * @param array $variables
  *   An associative array containing:
  *   - view: A View object.
  */
-function template_preprocess_owl_views(array &$variables) {
+function template_preprocess_owlcarousel_views(array &$variables) {
   $handler = $variables['view']->style_plugin;
 
-  $settings = _owl_format_settings($handler->options);
+  $settings = _owlcarousel_format_settings($handler->options);
   $variables['attributes']['data-settings'] = json_encode($settings);
   $variables['attributes']['class'][] = 'owl-slider-wrapper';
   $variables['attributes']['class'][] = 'owl-carousel';
@@ -93,7 +93,7 @@ function template_preprocess_owl_views(array &$variables) {
 /**
  * Default settings for owl.
  */
-function _owl_default_settings($key = NULL) {
+function _owlcarousel_default_settings($key = NULL) {
   $settings = [
     'image_style' => '',
     'image_link' => '',
@@ -130,21 +130,21 @@ function _owl_default_settings($key = NULL) {
 /**
  * Return formatted js array of settings.
  */
-function _owl_format_settings($settings) {
+function _owlcarousel_format_settings($settings) {
   $settings['items'] = (int) $settings['items'];
-  $settings['itemsDesktop'] = _owl_string_to_array($settings['itemsDesktop']);
+  $settings['itemsDesktop'] = _owlcarousel_string_to_array($settings['itemsDesktop']);
   foreach ($settings['itemsDesktop'] as $k => $v) {
     $settings['itemsDesktop'][$k] = (int) $v;
   }
-  $settings['itemsDesktopSmall'] = _owl_string_to_array($settings['itemsDesktopSmall']);
+  $settings['itemsDesktopSmall'] = _owlcarousel_string_to_array($settings['itemsDesktopSmall']);
   foreach ($settings['itemsDesktopSmall'] as $k => $v) {
     $settings['itemsDesktopSmall'][$k] = (int) $v;
   }
-  $settings['itemsTablet'] = _owl_string_to_array($settings['itemsTablet']);
+  $settings['itemsTablet'] = _owlcarousel_string_to_array($settings['itemsTablet']);
   foreach ($settings['itemsTablet'] as $k => $v) {
     $settings['itemsTablet'][$k] = (int) $v;
   }
-  $settings['itemsMobile'] = _owl_string_to_array($settings['itemsMobile']);
+  $settings['itemsMobile'] = _owlcarousel_string_to_array($settings['itemsMobile']);
   foreach ($settings['itemsMobile'] as $k => $v) {
     $settings['itemsMobile'][$k] = (int) $v;
   }
@@ -188,7 +188,7 @@ function _owl_format_settings($settings) {
  * @return array
  *   Converted array.
  */
-function _owl_string_to_array($str) {
+function _owlcarousel_string_to_array($str) {
   $str = trim($str);
   $str = str_replace('[', '', $str);
   $str = str_replace(']', '', $str);
