@@ -4,7 +4,6 @@ owlcarousel:
       lib/owl-carousel/owl.carousel.css: {}
       lib/owl-carousel/owl.theme.css: {}
       lib/owl-carousel/owl.transitions.css: {}
-      css/owl.css: {}
   js:
     lib/owl-carousel/owl.carousel.js: {}
     js/owlcarousel.js: {}
