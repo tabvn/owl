@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\owl\Plugin\views\style;
+namespace Drupal\owlcarousel\Plugin\views\style;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\views\Plugin\views\style\StylePluginBase;
@@ -12,8 +12,8 @@ use Drupal\views\Plugin\views\style\StylePluginBase;
  *
  * @ViewsStyle(
  *   id = "owlcarousel",
- *   title = @Translation("OwlCarousel Carousel"),
- *   help = @Translation("Displays rows as OwlCarousel Carousel."),
+ *   title = @Translation("OwlCarousel"),
+ *   help = @Translation("Displays rows as OwlCarousel."),
  *   theme = "owlcarousel_views",
  *   display_types = {"normal"}
  * )

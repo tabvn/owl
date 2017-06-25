@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\owl\Plugin\Field\FieldFormatter;
+namespace Drupal\owlcarousel\Plugin\Field\FieldFormatter;
 
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Cache\Cache;
