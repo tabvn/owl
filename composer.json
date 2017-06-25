@@ -1,0 +1,10 @@
+{
+  "name": "drupal/owlcarousel",
+  "description": "Drupal integration for Owl Carousel",
+  "type": "drupal-module",
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/owlcarousel",
+  "support": {
+    "issues": "https://www.drupal.org/project/owlcarousel"
+  }
+}
