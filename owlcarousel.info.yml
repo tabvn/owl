@@ -2,7 +2,7 @@ name: owlcarousel
 type: module
 description: OWL Carousel
 core: 8.x
-package: Tabvn
+package: Owl Carousel
 dependencies:
   - field
   - image
