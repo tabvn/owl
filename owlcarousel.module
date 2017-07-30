@@ -84,7 +84,7 @@ function template_preprocess_owlcarousel_views(array &$variables) {
   $variables['attributes']['class'][] = 'owl-carousel';
 
   $attached = [
-    '#attached' => ['library' => ['owl/owl']],
+    '#attached' => ['library' => ['owlcarousel/owlcarousel']],
   ];
   render($attached);
   template_preprocess_views_view_unformatted($variables);
